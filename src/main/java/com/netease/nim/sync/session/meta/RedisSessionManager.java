@@ -138,11 +138,9 @@ public class RedisSessionManager {
 	                    RedisSessionManager.this.log.debug("RedisHttpSession Request completed [ID=" + session.id + ",lastAccessedTime=" + CommonUtil.transFormDate(session.lastAccessedTime) + ",updateInterval=" + updateInterval + "]");
 	                }
 
-	                if(session.isNew || session.isDirty || updateInterval >= RedisSessionManager.this.expirationUpdateInterval) {
-	                    if(!session.isNew || !session.expired) {
+	                if(updateInterval >= RedisSessionManager.this.expirationUpdateInterval) {
 	                        session.lastAccessedTime = System.currentTimeMillis();
 	                        RedisSessionManager.this.saveSession(session);
-	                    }
 	                }
 	            }
 	        });
